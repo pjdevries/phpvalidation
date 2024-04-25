@@ -1,5 +1,5 @@
 {
-  "name": "obix/php-data-validation",
+  "name": "obix/phpvalidation",
   "description": "PHP data validation library, based on https://github.com/devcoder-xyz/php-validator/.",
   "type": "library",
   "license": "MIT, GNU GPLv2",
