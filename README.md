@@ -40,7 +40,7 @@ $validator = new Validator([
 $data = ['email' => 'john.doe@example.com'];
 
 // Validate the data
-if ($validator->validateArray($data) === true) {
+if ($validator->validate($data) === true) {
     echo "Email is valid!";
 } else {
     $errors = $validator->getErrors();
@@ -66,7 +66,7 @@ $validator = new Validator([
 $data = ['age' => 25];
 
 // Validate the data
-if ($validator->validateArray($data) === true) {
+if ($validator->validate($data) === true) {
     echo "Age is valid!";
 } else {
     $errors = $validator->getErrors();
@@ -97,7 +97,7 @@ $validator = new Validator([
 $data = ['username' => 'john_doe123'];
 
 // Validate the data
-if ($validator->validateArray($data) === true) {
+if ($validator->validate($data) === true) {
     echo "Username is valid!";
 } else {
     $errors = $validator->getErrors();
@@ -123,7 +123,7 @@ $validator = new Validator([
 $data = ['website' => 'https://example.com'];
 
 // Validate the data
-if ($validator->validateArray($data) === true) {
+if ($validator->validate($data) === true) {
     echo "Website URL is valid!";
 } else {
     $errors = $validator->getErrors();
@@ -149,7 +149,7 @@ $validator = new Validator([
 $data = ['price' => 99.99];
 
 // Validate the data
-if ($validator->validateArray($data) === true) {
+if ($validator->validate($data) === true) {
     echo "Price is valid!";
 } else {
     $errors = $validator->getErrors();
@@ -180,7 +180,7 @@ $validator = new Validator([
 $data = ['active' => true];
 
 // Validate the data
-if ($validator->validateArray($data) === true) {
+if ($validator->validate($data) === true) {
     echo "Value is valid!";
 } else {
     $errors = $validator->getErrors();
@@ -214,7 +214,7 @@ $validator = new Validator([
 ]);
 
 // Assume $request is the \Psr\Http\Message\ServerRequestInterface object containing form data
-if ($validator->validate($request) === true) {
+if ($validator->validateRequest($request) === true) {
     // Validation passed, retrieve validated data
     $validatedData = $validator->getData();
     // Process registration logic here (e.g., save to database)
@@ -257,7 +257,7 @@ $validator = new Validator([
 ]);
 
 // Assume $request is the \Psr\Http\Message\ServerRequestInterface object containing API input data
-if ($validator->validate($request) === true) {
+if ($validator->validateRequest($request) === true) {
     // Validation passed, proceed with processing API request
     $validatedData = $validator->getData();
     // Extract validated data

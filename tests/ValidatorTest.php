@@ -53,7 +53,7 @@ class ValidatorTest extends TestCase
             'Custom is bool' => true
         ];
 
-        $this->assertTrue($validator->validate(Request::create($tests)));
+        $this->assertTrue($validator->validateRequest(Request::create($tests)));
     }
 
     public function testFailure()
@@ -74,7 +74,7 @@ class ValidatorTest extends TestCase
             'Custom is bool' => 0
         ];
 
-        $this->assertFalse($validator->validate(Request::create($tests)));
+        $this->assertFalse($validator->validateRequest(Request::create($tests)));
 
         $errors = $validator->getErrors();
     }

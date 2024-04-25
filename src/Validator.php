@@ -31,26 +31,12 @@ final class Validator
     }
 
     /**
-     * Validate server request data.
-     *
-     * @param ServerRequestInterface $request The server request to validate
-     * @return bool
-     */
-    public function validate(ServerRequestInterface $request): bool
-    {
-        $data = array_map(fn($value) => is_string($value) && trim($value) === '' ? null : $value,
-            array_merge($request->getParsedBody(), $request->getUploadedFiles()));
-
-        return $this->validateArray($data);
-    }
-
-    /**
      * Validate an array of data using a set of validators.
      *
      * @param array $data The array of data to be validated
      * @return bool
      */
-    public function validateArray(array $data): bool
+    public function validate(array $data): bool
     {
         $this->data = $data;
 
@@ -65,6 +51,20 @@ final class Validator
             }
         }
         return !count($this->getErrors());
+    }
+
+    /**
+     * Validate server request data.
+     *
+     * @param ServerRequestInterface $request The server request to validate
+     * @return bool
+     */
+    public function validateRequest(ServerRequestInterface $request): bool
+    {
+        $data = array_map(fn($value) => is_string($value) && trim($value) === '' ? null : $value,
+            array_merge($request->getParsedBody(), $request->getUploadedFiles()));
+
+        return $this->validate($data);
     }
 
     /**
