@@ -108,7 +108,7 @@ final class Validator
             if (!$rule instanceof RuleInterface) {
                 throw new InvalidArgumentException(
                     sprintf(
-                        $field . ' validator must be an instance of ValidatorInterface, "%s" given.',
+                        $field . ' rule must be an instance of RuleInterface, "%s" given.',
                         is_object($rule) ? get_class($rule) : gettype($rule)
                     )
                 );
