@@ -51,7 +51,7 @@ class RuleList extends RuleBase
                 $result = $result || $rule->test($value, $name, $values);
             }
 
-            if (!$result) {
+            if (($this->boolOp === self::AND && !$result) || ($this->boolOp === self::OR && $result)) {
                 break;
             }
         }
