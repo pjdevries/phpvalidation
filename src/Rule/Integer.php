@@ -5,8 +5,8 @@ namespace Obix\Validator\Rule;
 final class Integer extends RuleBase
 {
     private string $invalidMessage = 'value should be of type {{ type }}';
-    private string $minMessage = '{{ value }} should be {{ limit }} or more';
-    private string $maxMessage = '{{ value }} should be {{ limit }} or less';
+    private string $minMessage = '\'{{ value }}\' should be {{ limit }} or more';
+    private string $maxMessage = '\'{{ value }}\' should be {{ limit }} or less';
     private ?int $min = null;
     private ?int $max = null;
 

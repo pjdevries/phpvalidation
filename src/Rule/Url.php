@@ -7,7 +7,7 @@ final class Url extends RuleBase
     /**
      * @var string
      */
-    private string $message = '{{ value }} is not a valid URL.';
+    private string $message = '\'{{ value }}\' is not a valid URL.';
 
     public function test($value, string $name, array $values): bool
     {

@@ -4,7 +4,7 @@ namespace Obix\Validator\Rule;
 
 final class Custom extends RuleBase
 {
-    private string $message = '"{{ value }}" is not valid';
+    private string $message = '\'{{ value }}\' does not meet validation criterion';
     /**
      * @var callable
      */

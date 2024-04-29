@@ -7,7 +7,7 @@ final class Email extends RuleBase
     /**
      * @var string
      */
-    private string $message = '{{ value }} is not a valid email address';
+    private string $message = '\'{{ value }}\' is not a valid e-mail address';
 
     public function test($value, string $name, array $values): bool
     {

@@ -53,7 +53,7 @@ class ValidatorTest extends TestCase
         $this->assertTrue(
             ($validator = new Validator([
                 'exists' => new Exists(),
-                'not exists' => new Not(new Exists())
+                'not exists' => (new Not(new Exists()))->setMessage('{{ field }} does not exist')
             ]))->validateRequest(
                 Request::create([
                     'exists' => 'foo'
@@ -64,7 +64,7 @@ class ValidatorTest extends TestCase
         $this->assertFalse(
             ($validator = new Validator([
                 'exists' => new Exists(),
-                'not exists' => new Not(new Exists())
+                'not exists' => (new Not(new Exists()))->setMessage('field \'{{ field }}\' exists')
             ]))->validateRequest(
                 Request::create([
                     'not exists' => 'foo'

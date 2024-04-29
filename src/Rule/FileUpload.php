@@ -8,7 +8,7 @@ final class FileUpload extends RuleBase
 {
     private string $message = 'value should be instance of {{ class }}.';
     private string $maxSizeMessage = 'file is too large ({{ size }} MB; allowed maximum size is {{ limit }} MB';
-    private string $mimeTypesMessage = 'mime type of the file is invalid ({{ type }}); allowed mime types are {{ types }}.';
+    private string $mimeTypesMessage = 'the mime type \'{{ type }}\' of the file is not allowed; allowed mime types are: {{ types }}.';
     private ?int $maxSize = null;
     public array $mimeTypes = [];
 

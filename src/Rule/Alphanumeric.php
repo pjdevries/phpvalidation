@@ -4,7 +4,7 @@ namespace Obix\Validator\Rule;
 
 final class Alphanumeric extends RuleBase
 {
-    private string $message = 'value should be of type {{ type }}';
+    private string $message = 'value \'{{ value }}\'should be of type {{ type }}';
 
     public function test($value, string $name, array $values): bool
     {
