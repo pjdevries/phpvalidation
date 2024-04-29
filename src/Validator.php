@@ -25,8 +25,36 @@ final class Validator
 
     public function __construct(array $fieldRules)
     {
+        $this->addRules($fieldRules);
+    }
+
+    public function addRules(array $fieldRules)
+    {
         foreach ($fieldRules as $fieldName => $rules) {
             $this->addRule($fieldName, is_array($rules) ? $rules : [$rules]);
+        }
+    }
+
+    /**
+     * Add a validator for a specific field.
+     *
+     * @param string $field The field to validate
+     * @param array<RuleInterface> $rules The validators to apply
+     * @return void
+     */
+    private function addRule(string $field, array $rules): void
+    {
+        foreach ($rules as $rule) {
+            if (!$rule instanceof RuleInterface) {
+                throw new InvalidArgumentException(
+                    sprintf(
+                        $field . ' rule must be an instance of RuleInterface, "%s" given.',
+                        is_object($rule) ? get_class($rule) : gettype($rule)
+                    )
+                );
+            }
+
+            $this->rules[$field][] = $rule;
         }
     }
 
@@ -45,11 +73,12 @@ final class Validator
          */
         foreach ($this->rules as $fieldName => $rules) {
             foreach ($rules as $rule) {
-                if ($rule->test($this->data[$fieldName] ?? null, $fieldName, $this->rules) === false) {
+                if ($rule->test($this->data[$fieldName] ?? null, $fieldName, $this->data) === false) {
                     $this->addError($fieldName, (string)$rule->getError());
                 }
             }
         }
+
         return !count($this->getErrors());
     }
 
@@ -93,28 +122,5 @@ final class Validator
     private function addError(string $field, string $message): void
     {
         $this->errors[$field][] = $message;
-    }
-
-    /**
-     * Add a validator for a specific field.
-     *
-     * @param string $field The field to validate
-     * @param array<RuleInterface> $rules The validators to apply
-     * @return void
-     */
-    private function addRule(string $field, array $rules): void
-    {
-        foreach ($rules as $rule) {
-            if (!$rule instanceof RuleInterface) {
-                throw new InvalidArgumentException(
-                    sprintf(
-                        $field . ' rule must be an instance of RuleInterface, "%s" given.',
-                        is_object($rule) ? get_class($rule) : gettype($rule)
-                    )
-                );
-            }
-
-            $this->rules[$field][] = $rule;
-        }
     }
 }
