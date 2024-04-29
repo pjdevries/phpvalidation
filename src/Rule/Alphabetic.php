@@ -9,7 +9,7 @@ final class Alphabetic extends RuleBase
     public function test($value, string $name, array $values): bool
     {
         if ($value === null) {
-            return true;
+            return false;
         }
 
         if (ctype_alpha($value) === false) {
