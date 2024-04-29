@@ -77,7 +77,7 @@ class ValidatorTest extends TestCase
     {
         $this->assertTrue(
             ($validator = new Validator([
-                'not true' => new Not(new Custom(fn($value) => $value === false))
+                'not true' => new Not(new Custom(fn($value) => $value === true))
             ]))->validateRequest(
                 Request::create([
                     'not true' => false
@@ -87,10 +87,37 @@ class ValidatorTest extends TestCase
 
         $this->assertFalse(
             ($validator = new Validator([
-                'not true' => new Not(new Custom(fn($value) => $value === false))
+                'not true' => new Not(new Custom(fn($value) => $value === true))
             ]))->validateRequest(
                 Request::create([
                     'not true' => true
+                ])
+            )
+        );
+    }
+
+    public function testRuleList(): void
+    {
+        $this->assertTrue(
+            ($validator = new Validator([
+                'true and true' => new RuleList(new Alphabetic(), (new StringLength())->setMaxLength(10)),
+                'true or true' => (new RuleList(new Alphabetic(), (new StringLength())->setMaxLength(10)))->setBoolOp(RuleList::OR),
+            ]))->validateRequest(
+                Request::create([
+                    'true and true' => 'abc',
+                    'true or true' => 'abcdefghi1',
+                ])
+            )
+        );
+
+        $this->assertFalse(
+            ($validator = new Validator([
+                'true and true' => new RuleList(new Alphabetic(), (new StringLength())->setMaxLength(10)),
+                'true or true' => (new RuleList(new Alphabetic(), (new StringLength())->setMaxLength(10)))->setBoolOp(RuleList::OR),
+            ]))->validateRequest(
+                Request::create([
+                    'true and true' => 'abc1',
+                    'true or true' => 'abcdefghi12345',
                 ])
             )
         );
