@@ -27,12 +27,13 @@ class Not extends RuleBase
      */
     public function test($value, string $name, array $values): bool
     {
-        if ($this->rule->test($value, $name, $values)) {
+        $result = !$this->rule->test($value, $name, $values);
+
+        if (!$result) {
             $this->setError($this->message, ['value' => $value, 'field' => $name]);
-            return false;
         }
 
-        return true;
+        return $result;
     }
 
     public function setMessage(string $message): self
