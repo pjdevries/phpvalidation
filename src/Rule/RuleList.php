@@ -57,7 +57,7 @@ class RuleList extends RuleBase
         }
 
         if (!$result) {
-            $this->setError($this->message, ['value' => $value]);
+            $this->setError($this->message, ['value' => $value, 'field' => $name]);
         }
 
         return $result;
