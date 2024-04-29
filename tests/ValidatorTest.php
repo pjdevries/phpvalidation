@@ -73,6 +73,29 @@ class ValidatorTest extends TestCase
         );
     }
 
+    public function testNot(): void
+    {
+        $this->assertTrue(
+            ($validator = new Validator([
+                'not true' => new Not(new Custom(fn($value) => $value === false))
+            ]))->validateRequest(
+                Request::create([
+                    'not true' => false
+                ])
+            )
+        );
+
+        $this->assertFalse(
+            ($validator = new Validator([
+                'not true' => new Not(new Custom(fn($value) => $value === false))
+            ]))->validateRequest(
+                Request::create([
+                    'not true' => true
+                ])
+            )
+        );
+    }
+
     private function getRules(): array
     {
         return [
