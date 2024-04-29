@@ -75,6 +75,7 @@ final class Validator
             foreach ($rules as $rule) {
                 if ($rule->test($this->data[$fieldName] ?? null, $fieldName, $this->data) === false) {
                     $this->addError($fieldName, (string)$rule->getError());
+                    break;
                 }
             }
         }

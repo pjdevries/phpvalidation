@@ -47,10 +47,13 @@ class RuleList extends RuleBase
         foreach ($this->rules as $rule) {
             if ($this->boolOp === self::AND) {
                 $result = $result && $rule->test($value, $name, $values);
-                continue;
+            } else {
+                $result = $result || $rule->test($value, $name, $values);
             }
 
-            $result = $result || $rule->test($value, $name, $values);
+            if (!$result) {
+                break;
+            }
         }
 
         if (!$result) {
