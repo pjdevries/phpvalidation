@@ -59,4 +59,11 @@ class RuleList extends RuleBase
 
         return $result;
     }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
 }
