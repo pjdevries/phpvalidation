@@ -16,6 +16,8 @@ class Not extends RuleBase
 {
     private RuleInterface $rule;
 
+    private string $message = '';
+
     public function __construct(RuleInterface $rule) {
         $this->rule = $rule;
     }
@@ -25,13 +27,23 @@ class Not extends RuleBase
      */
     public function test($value, string $name, array $values): bool
     {
-        $result = $this->rule->test($value, $name, $values);
+        if ($this->rule->test($value, $name, $values)) {
+            $this->setError($this->message, ['value' => $value, 'field' => $name]);
+            return false;
+        }
 
-        return !$result;
+        return true;
+    }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
     }
 
     public function getError(): ?string
     {
-        return $this->rule->getError();
+        return $this->message ? parent::getError() : $this->rule->getError();
     }
 }
