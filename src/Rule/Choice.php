@@ -4,7 +4,7 @@ namespace Obix\Validator\Rule;
 
 final class Choice extends RuleBase
 {
-    private string $message = '\'{{ value }}\' does not occur in list {{ choices }}';
+    private string $message = '\'{{ value }}\' does not occur in list: {{ choices }}';
     private array $choices;
 
     public function __construct(array $choices)

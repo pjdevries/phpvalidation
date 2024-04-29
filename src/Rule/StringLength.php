@@ -6,7 +6,7 @@ final class StringLength extends RuleBase
 {
     private string $invalidMessage = 'value is not a string';
     private string $minMessage = '\'{{ value }}\' must be at least {{ limit }} characters long';
-    private string $maxMessage = '\'{{ value }}\' cannot be longer than {{ limit }} characters';
+    private string $maxMessage = '\'{{ value }}\' may not be longer than {{ limit }} characters';
     private ?int $min = null;
     private ?int $max = null;
 
